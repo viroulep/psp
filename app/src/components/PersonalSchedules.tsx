@@ -91,10 +91,12 @@ function activityToEvent(assignment: Assignment,
   activitiesById: ActivitiesById) {
   const { activityId, assignmentCode } = assignment;
   const activity = activitiesById[activityId];
-  const { eventId, groupNumber, roundNumber } = parseActivityCode(activity.activityCode);
+  const { eventId, groupNumber, roundNumber, attemptNumber } = parseActivityCode(activity.activityCode);
+  const groupString = groupNumber ? ` - G${groupNumber}` : '';
+  const attemptString = attemptNumber ? ` - A${attemptNumber}` : '';
   return {
     id: `${activity.id}`,
-    title: `${allEvents[eventId].shortName}-R${roundNumber} - G${groupNumber} - ${codeToShort[assignmentCode] || assignmentCode}`,
+    title: `${allEvents[eventId].shortName}-R${roundNumber}${groupString}${attemptString} - ${codeToShort[assignmentCode] || assignmentCode}`,
     color: activity.room.color,
     start: activity.startTime,
     end: activity.endTime,
