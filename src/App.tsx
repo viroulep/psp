@@ -3,27 +3,43 @@ import { Competition } from '@wca/helpers';
 
 import './App.css';
 import PersonalSchedules from './components/PersonalSchedules';
+import { REMOTES, WcifUrlSelector } from './components/WcifUrlSelector';
 
 
 function App() {
-  //const wcif = require("./wcif.json") as Competition;
-  const id = "FrenchChampionship2023";
-  const [wcif, setWcif] = useState(undefined);
+  const [wcif, setWcif] = useState<Competition | undefined>(undefined);
+  const [loading, setLoading] = useState(false);
+  const params = new URLSearchParams(document.location.search);
+  const id = params.get("id");
+  const remote = params.get("remote") || "prod";
   useEffect(() => {
-    console.log("coucou");
-    fetch(`https://staging.worldcubeassociation.org/api/v0/competitions/${id}/wcif/public`)
-      .then(response => response.json())
-      .then(setWcif)
-      .catch(error => console.log(error));
-  }, [id])
+    if (!id || !remote || !REMOTES[remote]) {
+      return;
+    }
+    const url = `${REMOTES[remote]}/api/v0/competitions/${id}/wcif/public`;
+    setLoading(true);
+    fetch(url)
+      .then(res => res.json())
+      .then(json => {
+        if ('error' in json) {
+          console.error(json);
+          return;
+        }
+        setWcif(json);
+      })
+      .catch(e => console.error(e))
+      .finally(() => setLoading(false));
+  }, [id, remote]);
   return (
     <div className="App">
-      {wcif ? (
+      {wcif && (
         <PersonalSchedules wcif={wcif} />
-      ) : (
-        <div>
-          No WCIF yet.
-        </div>
+      )}
+      {!wcif && !loading && (
+        <WcifUrlSelector setWcif={setWcif} />
+      )}
+      {loading && (
+        <p>Loading WCIF.</p>
       )}
     </div>
   );
