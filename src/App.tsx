@@ -1,24 +1,15 @@
 import React from 'react';
-import logo from './logo.svg';
+import { Competition } from '@wca/helpers';
+
 import './App.css';
+import PersonalSchedules from './components/PersonalSchedules';
+
 
 function App() {
+  const wcif = require("./wcif.json") as Competition;
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <PersonalSchedules wcif={wcif} />
     </div>
   );
 }
