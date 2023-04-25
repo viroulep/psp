@@ -1,0 +1,27 @@
+.cal-column {
+  width: 6.8cm;
+  margin-left: 0.1cm;
+  margin-right: 0.1cm;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+}
+
+p, tr, .cal, .fc {
+  page-break-inside: avoid !important;
+}
+
+.fc td.fc-list-event-graphic {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+p.name {
+  font-weight: bold;
+  page-break-after: avoid !important;
+}
+
+body {
+}
