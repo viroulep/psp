@@ -3,6 +3,7 @@ import { Competition } from '@wca/helpers';
 
 import './App.css';
 import PersonalSchedules from './components/PersonalSchedules';
+import RenderingHelp from './components/RenderingHelp';
 import { REMOTES, WcifUrlSelector } from './components/WcifUrlSelector';
 
 
@@ -36,7 +37,10 @@ function App() {
         <PersonalSchedules wcif={wcif} />
       )}
       {!wcif && !loading && (
-        <WcifUrlSelector setWcif={setWcif} />
+        <>
+          <RenderingHelp />
+          <WcifUrlSelector setWcif={setWcif} />
+        </>
       )}
       {loading && (
         <p>Loading WCIF.</p>

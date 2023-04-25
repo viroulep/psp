@@ -21,7 +21,8 @@ const puppeteer = require('puppeteer');
 (async () => {
   const browser = await puppeteer.launch({ headless: 'new' });
   const page = await browser.newPage();
-  await page.goto('http://localhost:3000/?id=FrenchChampionship2023', {
+  //await page.goto('http://localhost:3000/?id=FrenchChampionship2022&remote=env', {
+  await page.goto('http://localhost:3000/?id=FrenchChampionship2023&remote=staging', {
     waitUntil: 'networkidle0',
   });
   await page.emulateMediaType('screen');

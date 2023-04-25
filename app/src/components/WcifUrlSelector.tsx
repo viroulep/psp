@@ -13,6 +13,7 @@ type SelectorProps = {
 export function WcifUrlSelector({ setWcif } : SelectorProps) {
   const [baseUrl, setBaseUrl] = useState("prod");
   const [id, setId] = useState("");
+  const url = `${document.location}?id=${id}&remote=${baseUrl}`;
 
   return (
     <div>
@@ -37,7 +38,7 @@ export function WcifUrlSelector({ setWcif } : SelectorProps) {
       </label>
       <br />
       {id.length > 0 && (
-        <a href={`?id=${id}&remote=${baseUrl}`}>go</a>
+        <a href={url}>{url}</a>
       )}
     </div>
   );
