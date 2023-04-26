@@ -1,20 +1,18 @@
-import React, { useMemo } from 'react';
+import React, { useMemo } from "react";
 
-import { Competition } from '@wca/helpers';
+import { Competition } from "@wca/helpers";
 
-import { computeActivitiesById, ActivitiesById } from '../lib/activity';
-import IndividualCalendar from './IndividualCalendar';
+import { computeActivitiesById, ActivitiesById } from "../lib/activity";
+import IndividualCalendar from "./IndividualCalendar";
 
 type Props = {
   wcif: Competition;
 };
 
-const COLUMNS = Array.from(Array(3).keys())
+const COLUMNS = Array.from(Array(3).keys());
 
-export default function PersonalSchedules({ wcif } :
-Props) {
-  const sorted =
-wcif.persons.sort((a, b) => a.name.localeCompare(b.name));
+export default function PersonalSchedules({ wcif }: Props) {
+  const sorted = wcif.persons.sort((a, b) => a.name.localeCompare(b.name));
   const chunkSize = wcif.persons.length / COLUMNS.length;
   const activitiesById: ActivitiesById = useMemo(
     () => computeActivitiesById(wcif.schedule),
@@ -25,7 +23,7 @@ wcif.persons.sort((a, b) => a.name.localeCompare(b.name));
   const timezone = wcif.schedule.venues[0].timezone;
   return (
     <div className="row">
-      {COLUMNS.map(i => {
+      {COLUMNS.map((i) => {
         const start = i * chunkSize;
         const persons = sorted.slice(start, start + chunkSize);
         return (
@@ -43,7 +41,7 @@ wcif.persons.sort((a, b) => a.name.localeCompare(b.name));
               );
             })}
           </div>
-        )
+        );
       })}
     </div>
   );

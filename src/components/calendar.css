@@ -9,7 +9,10 @@
   flex-direction: row;
 }
 
-p, tr, .cal, .fc {
+p,
+tr,
+.cal,
+.fc {
   page-break-inside: avoid !important;
 }
 

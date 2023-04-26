@@ -1,14 +1,14 @@
-import React from 'react';
+import React from "react";
 
-import FullCalendar from '@fullcalendar/react';
-import listPlugin from '@fullcalendar/list';
-import momentTimezonePlugin from '@fullcalendar/moment-timezone';
-import { Assignment } from '@wca/helpers';
+import FullCalendar from "@fullcalendar/react";
+import listPlugin from "@fullcalendar/list";
+import momentTimezonePlugin from "@fullcalendar/moment-timezone";
+import { Assignment } from "@wca/helpers";
 
-import { ActivitiesById } from '../lib/activity';
-import { activityToEvent } from '../lib/calendar';
+import { ActivitiesById } from "../lib/activity";
+import { activityToEvent } from "../lib/calendar";
 
-import './calendar.css';
+import "./calendar.css";
 
 type Props = {
   activitiesById: ActivitiesById;
@@ -16,11 +16,16 @@ type Props = {
   timezone: string;
 };
 
-export default function IndividualCalendar( { activitiesById, timezone, assignments } : Props) {
-  const events = assignments.map(({ assignmentCode, activityId }) => activityToEvent(assignmentCode, activitiesById[activityId]));
-  const eventsByDate: { [key: string]: any[] } = {
-  };
-  events.forEach(e => {
+export default function IndividualCalendar({
+  activitiesById,
+  timezone,
+  assignments,
+}: Props) {
+  const events = assignments.map(({ assignmentCode, activityId }) =>
+    activityToEvent(assignmentCode, activitiesById[activityId])
+  );
+  const eventsByDate: { [key: string]: any[] } = {};
+  events.forEach((e) => {
     // FIXME: in puppeteer it seems relying on Date printing doesn't quite work;
     // Slicing is not reliable but it works atm.
     const date = e.start.slice(0, 10);
@@ -37,19 +42,19 @@ export default function IndividualCalendar( { activitiesById, timezone, assignme
             key={d}
             plugins={[listPlugin, momentTimezonePlugin]}
             initialDate={d}
-            initialView='compList'
+            initialView="compList"
             headerToolbar={false}
             displayEventEnd={false}
-            contentHeight='auto'
+            contentHeight="auto"
             eventTimeFormat={{
               hour12: false,
-              hour: '2-digit',
-              minute: '2-digit',
+              hour: "2-digit",
+              minute: "2-digit",
             }}
             timeZone={timezone}
             views={{
-              'compList': {
-                type: 'list',
+              compList: {
+                type: "list",
                 duration: { days: 1 },
               },
             }}
@@ -60,4 +65,3 @@ export default function IndividualCalendar( { activitiesById, timezone, assignme
     </>
   );
 }
-

@@ -1,14 +1,14 @@
-import React from 'react';
+import React from "react";
 
 export default function RenderingHelp() {
   return (
     <div>
       <p>
-        This website is not meant to be visited from the browser as a regular user,
-        but rather from a headless browser (such as puppeteer) to make the export
-        to pdf as easy as possible.
-        You can obviously still preview how it will look like by visiting the
-        competition page; you can use the form below to help construct the URL.
+        This website is not meant to be visited from the browser as a regular
+        user, but rather from a headless browser (such as puppeteer) to make the
+        export to pdf as easy as possible. You can obviously still preview how
+        it will look like by visiting the competition page; you can use the form
+        below to help construct the URL.
       </p>
       <div>
         <p>
@@ -18,8 +18,10 @@ export default function RenderingHelp() {
           to create a pdf export. It boils down to running these commands:
         </p>
         <pre>
-          cd rendering<br/>
-          npm install<br/>
+          cd rendering
+          <br />
+          npm install
+          <br />
           node pdf.js competitionId prod
         </pre>
         <p>
