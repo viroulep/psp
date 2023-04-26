@@ -35,7 +35,7 @@ console.log(`Generating pdf for '${competitionId}' from '${remote}' in ${pdfName
 (async () => {
   const browser = await puppeteer.launch({ headless: 'new' });
   const page = await browser.newPage();
-  await page.goto(`http://localhost:3000/?id=${competitionId}&remote=${remote}`, {
+  await page.goto(`https://philippevirouleau.fr/psp/?id=${competitionId}&remote=${remote}`, {
     waitUntil: 'networkidle0',
   });
   await page.emulateMediaType('screen');
