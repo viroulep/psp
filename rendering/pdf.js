@@ -18,18 +18,31 @@
 
 const puppeteer = require('puppeteer');
 
+const argc = process.argv.length;
+if (argc < 3) {
+  console.log('Usage: node pdf.js competitionId [prod|staging|env]');
+  return;
+}
+
+
+const remote = argc == 4 ? process.argv[3] : 'prod';
+const competitionId = process.argv[2];
+const pdfName = 'schedules.pdf';
+
+console.log(`Generating pdf for '${competitionId}' from '${remote}' in ${pdfName}`);
+// FIXME: fix the url below
+
 (async () => {
   const browser = await puppeteer.launch({ headless: 'new' });
   const page = await browser.newPage();
-  //await page.goto('http://localhost:3000/?id=FrenchChampionship2022&remote=env', {
-  await page.goto('http://localhost:3000/?id=FrenchChampionship2023&remote=staging', {
+  await page.goto(`http://localhost:3000/?id=${competitionId}&remote=${remote}`, {
     waitUntil: 'networkidle0',
   });
   await page.emulateMediaType('screen');
   // page.pdf() is currently supported only in headless mode.
   // @see https://bugs.chromium.org/p/chromium/issues/detail?id=753118
   await page.pdf({
-    path: 'schedules.pdf',
+    path: pdfName,
     format: 'a4',
   });
 

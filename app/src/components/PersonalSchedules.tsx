@@ -77,7 +77,6 @@ type CalendarProps = {
   activitiesById: ActivitiesById;
   assignments: Assignment[];
   views: any;
-  date: string;
 };
 
 const codeToShort: { [key: string]: string } = {
@@ -103,7 +102,7 @@ function activityToEvent(assignment: Assignment,
   };
 }
 
-function Cal({ activitiesById, views, date, assignments } : CalendarProps) {
+function Cal({ activitiesById, views, assignments } : CalendarProps) {
   const events = assignments.map(a => activityToEvent(a, activitiesById));
   const eventsByDate: { [key: string]: any[] } = {
   };
@@ -147,11 +146,11 @@ type PSProps = {
   wcif: Competition;
 };
 
+const COLUMNS = Array.from(Array(3).keys())
+
 export default function PersonalSchedules({ wcif } : PSProps) {
   const sorted = wcif.persons.sort((a, b) => a.name.localeCompare(b.name));
-  const persons = sorted.slice(0, 10);
-  const persons1 = sorted.slice(10, 20);
-  const persons2 = sorted.slice(20, 30);
+  const chunkSize = wcif.persons.length / COLUMNS.length;
   const activitiesById: ActivitiesById = useMemo(
     () => computeActivitiesById(wcif.schedule),
     [wcif]
@@ -164,51 +163,26 @@ export default function PersonalSchedules({ wcif } : PSProps) {
   };
   return (
     <div className="row">
-      <div className="cal-column">
-        {persons.map(({ wcaId, name, assignments }) => {
-          return (
-            <div key={wcaId} className="cal">
-              <p className="name">{name}</p>
-              <Cal
-                activitiesById={activitiesById}
-                assignments={assignments || []}
-                views={views}
-                date={wcif.schedule.startDate}
-              />
-            </div>
-          );
-        })}
-      </div>
-      <div className="cal-column">
-        {persons1.map(({ wcaId, name, assignments }) => {
-          return (
-            <div key={wcaId} className="cal">
-              <p className="name">{name}</p>
-              <Cal
-                activitiesById={activitiesById}
-                assignments={assignments || []}
-                views={views}
-                date={wcif.schedule.startDate}
-              />
-            </div>
-          );
-        })}
-      </div>
-      <div className="cal-column">
-        {persons2.map(({ wcaId, name, assignments }) => {
-          return (
-            <div key={wcaId} className="cal">
-              <p className="name">{name}</p>
-              <Cal
-                activitiesById={activitiesById}
-                assignments={assignments || []}
-                views={views}
-                date={wcif.schedule.startDate}
-              />
-            </div>
-          );
-        })}
-      </div>
+      {COLUMNS.map(i => {
+        const start = i * chunkSize;
+        const persons = sorted.slice(start, start + chunkSize);
+        return (
+          <div className="cal-column" key={i}>
+            {persons.map(({ wcaId, wcaUserId, name, assignments }) => {
+              return (
+                <div key={wcaUserId} className="cal">
+                  <p className="name">{name}</p>
+                  <Cal
+                    activitiesById={activitiesById}
+                    assignments={assignments || []}
+                    views={views}
+                  />
+                </div>
+              );
+            })}
+          </div>
+        )
+      })}
     </div>
   );
 }

@@ -8,19 +8,25 @@ export default function RenderingHelp() {
         but rather from a headless browser (such as puppeteer) to make the export
         to pdf as easy as possible.
         You can obviously still preview how it will look like by visiting the
-        comptition page.
+        competition page; you can use the form below to help construct the URL.
       </p>
-      <p>
-        You can use the form below to help construct the URL, then you can use the
-        pdf export helper in the <code>rendering</code> folder:
-        edit <code>pdf.js</code> to include the appropriate url, then run the following:
+      <div>
+        <p>
+          You need to figure out the competition id you want to use, and where
+          to get the data from (it defaults to the WCA's production website).
+          Then you can use the node script in the <code>rendering</code> folder
+          to create a pdf export. It boils down to running these commands:
+        </p>
         <pre>
+          cd rendering<br/>
           npm install<br/>
-          node pdf.js
+          node pdf.js competitionId prod
         </pre>
-        You should then have a <code>schedules.pdf</code> file after some time
-        depending on the size of your competition.
-      </p>
+        <p>
+          You should then have a <code>schedules.pdf</code> file after some time
+          depending on the size of your competition.
+        </p>
+      </div>
     </div>
   );
 }
