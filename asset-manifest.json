@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/psp/static/css/main.137e32ca.css",
+    "main.js": "/psp/static/js/main.78fe91aa.js",
+    "static/js/787.48142e48.chunk.js": "/psp/static/js/787.48142e48.chunk.js",
+    "index.html": "/psp/index.html",
+    "main.137e32ca.css.map": "/psp/static/css/main.137e32ca.css.map",
+    "main.78fe91aa.js.map": "/psp/static/js/main.78fe91aa.js.map",
+    "787.48142e48.chunk.js.map": "/psp/static/js/787.48142e48.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.137e32ca.css",
+    "static/js/main.78fe91aa.js"
+  ]
+}
