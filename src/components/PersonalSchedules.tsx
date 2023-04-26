@@ -11,8 +11,10 @@ type Props = {
 
 const COLUMNS = Array.from(Array(3).keys())
 
-export default function PersonalSchedules({ wcif } : Props) {
-  const sorted = wcif.persons.sort((a, b) => a.name.localeCompare(b.name));
+export default function PersonalSchedules({ wcif } :
+Props) {
+  const sorted =
+wcif.persons.sort((a, b) => a.name.localeCompare(b.name));
   const chunkSize = wcif.persons.length / COLUMNS.length;
   const activitiesById: ActivitiesById = useMemo(
     () => computeActivitiesById(wcif.schedule),

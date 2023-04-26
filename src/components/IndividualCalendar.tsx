@@ -16,7 +16,7 @@ type Props = {
   timezone: string;
 };
 
-export default function IndividualCalendar({ activitiesById, timezone, assignments } : Props) {
+export default function IndividualCalendar( { activitiesById, timezone, assignments } : Props) {
   const events = assignments.map(({ assignmentCode, activityId }) => activityToEvent(assignmentCode, activitiesById[activityId]));
   const eventsByDate: { [key: string]: any[] } = {
   };
