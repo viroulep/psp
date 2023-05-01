@@ -30,8 +30,6 @@ const competitionId = process.argv[2];
 const pdfName = 'schedules.pdf';
 
 console.log(`Generating pdf for '${competitionId}' from '${remote}' in ${pdfName}`);
-// FIXME: fix the url below
-
 (async () => {
   const browser = await puppeteer.launch({ headless: 'new' });
   const page = await browser.newPage();
