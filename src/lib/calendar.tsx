@@ -10,6 +10,7 @@ const codeToShort: { [key: string]: string } = {
   "staff-scrambler": "Scr",
   "staff-judge": "Judge",
   "staff-runner": "Run",
+  "staff-Delegate": "D",
 };
 
 function computeEventTitle(
@@ -18,10 +19,10 @@ function computeEventTitle(
 ): string {
   const { eventId, groupNumber, roundNumber, attemptNumber } = activityInfo;
   const roundString = `${getEventShortName(eventId)}-R${roundNumber}`;
-  const groupString = groupNumber ? ` - G${groupNumber}` : "";
-  const attemptString = attemptNumber ? ` - A${attemptNumber}` : "";
+  const groupString = groupNumber ? `-G${groupNumber}` : "";
+  const attemptString = attemptNumber ? `-A${attemptNumber}` : "";
   const assignString = codeToShort[assignmentCode] || assignmentCode;
-  return `${roundString}${groupString}${attemptString} - ${assignString}`;
+  return `${roundString}${groupString}${attemptString} ${assignString}`;
 }
 
 export function activityToEvent(
